@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>QXO</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+        background: #060a08;
+        color: #e8ffe8;
+        padding: 20px;
+      }
+      .wrap {
+        width: min(360px, 100%);
+        text-align: center;
+      }
+      .logo {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        margin-bottom: 14px;
+        box-shadow: 0 0 28px rgba(0, 255, 102, 0.35);
+      }
+      h1 {
+        margin: 0 0 20px;
+        font-size: 1.85rem;
+        color: #00ff66;
+        letter-spacing: 0.14em;
+      }
+      .code-box {
+        width: 100%;
+        margin-bottom: 14px;
+        padding: 12px 14px;
+        text-align: left;
+        border-radius: 10px;
+        border: 1px solid rgba(0, 255, 102, 0.35);
+        background: rgba(0, 0, 0, 0.45);
+        color: #b8ffd4;
+        font-size: 0.68rem;
+        line-height: 1.45;
+        font-family: ui-monospace, "Cascadia Code", Consolas, monospace;
+        word-break: break-all;
+        max-height: 140px;
+        overflow: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+      #copy-bookmark {
+        width: 100%;
+        padding: 18px 20px;
+        border: none;
+        border-radius: 12px;
+        background: #00ff66;
+        color: #052210;
+        font-size: 1.05rem;
+        font-weight: 700;
+        cursor: pointer;
+        font-family: inherit;
+        touch-action: manipulation;
+        box-shadow: 0 0 30px rgba(0, 255, 102, 0.25);
+      }
+      #copy-bookmark:active {
+        background: #00e65c;
+        transform: scale(0.98);
+      }
+      .status {
+        min-height: 24px;
+        margin-top: 14px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: #00ff66;
+      }
+      .status.err {
+        color: #ff6b6b;
+      }
+      
+      /* New Password Section Styling */
+      .pass-box {
+        width: 100%;
+        padding: 12px;
+        margin-bottom: 15px;
+        border-radius: 8px;
+        border: 1px solid rgba(0, 255, 102, 0.5);
+        background: #000;
+        color: #fff;
+        text-align: center;
+        font-size: 1rem;
+      }
+      .unlock-btn {
+        width: 100%;
+        padding: 14px;
+        border: none;
+        border-radius: 10px;
+        background: #00ff66;
+        color: #052210;
+        font-weight: bold;
+        cursor: pointer;
+        font-size: 1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <img
+        class="logo"
+        src="https://i.ibb.co.com/XZHHMDpB/qxo.jpg"
+        alt="QXO"
+        width="80"
+        height="80"
+      />
+      <h1>QXO</h1>
+
+      <!-- Password Section -->
+      <div id="password-gate">
+        <input type="password" id="access-password" class="pass-box" placeholder="Enter Access Password" />
+        <button type="button" class="unlock-btn" onclick="checkAccess()">Unlock System</button>
+      </div>
+
+      <!-- Main Website Content (Hidden initially) -->
+      <div id="main-content" style="display: none;">
+        <pre class="code-box" id="code-box"></pre>
+        <button type="button" id="copy-bookmark">Copy bookmark code</button>
+        <p class="status" id="status"></p>
+      </div>
+    </div>
+
+    <script>
+      // Password verification function
+      function checkAccess() {
+        var userInput = document.getElementById("access-password").value;
+        if (userInput === "QXO_OSMAN") {
+          document.getElementById("password-gate").style.display = "none";
+          document.getElementById("main-content").style.display = "block";
+        } else {
+          alert("Incorrect Password! Access Denied.");
+        }
+      }
+
+      (function () {
+        var scriptUrl =
+          window.location.origin + "/qx999-console.js";
+        var bookmarklet =
+          "javascript:(function(){var u=atob('" +
+          btoa(scriptUrl) +
+          "');fetch(u+'?t='+Date.now()).then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.text()}).then(function(c){window.__BHX_ASSET_BASE__=new URL(u).origin;eval(c)}).catch(console.error)})();";
+
+        document.getElementById("code-box").textContent = bookmarklet;
+
+        var btn = document.getElementById("copy-bookmark");
+        var status = document.getElementById("status");
+
+        function setStatus(msg, isErr) {
+          status.textContent = msg;
+          status.className = "status" + (isErr ? " err" : "");
+        }
+
+        function copyText(text) {
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            return navigator.clipboard.writeText(text);
+          }
+          var ta = document.createElement("textarea");
+          ta.value = text;
+          ta.style.position = "fixed";
+          ta.style.left = "-9999px";
+          document.body.appendChild(ta);
+          ta.select();
+          document.execCommand("copy");
+          document.body.removeChild(ta);
+          return Promise.resolve();
+        }
+
+        btn.addEventListener("click", function () {
+          copyText(bookmarklet)
+            .then(function () {
+              setStatus("Copied! Paste into bookmark URL.");
+            })
+            .catch(function () {
+              setStatus("Copy failed", true);
+            });
+        });
+      })();
+    </script>
+  </body>
+</html>
