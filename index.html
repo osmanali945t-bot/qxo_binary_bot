@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bn">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>QXO</title>
+    <title>BHX</title>
     <style>
       * {
         box-sizing: border-box;
@@ -81,68 +81,30 @@
       .status.err {
         color: #ff6b6b;
       }
-      .pass-box {
-        width: 100%;
-        padding: 12px;
-        margin-bottom: 15px;
-        border-radius: 8px;
-        border: 1px solid rgba(0, 255, 102, 0.5);
-        background: #000;
-        color: #fff;
-        text-align: center;
-        font-size: 1rem;
-      }
-      .unlock-btn {
-        width: 100%;
-        padding: 14px;
-        border: none;
-        border-radius: 10px;
-        background: #00ff66;
-        color: #052210;
-        font-weight: bold;
-        cursor: pointer;
-        font-size: 1rem;
-      }
     </style>
   </head>
   <body>
     <div class="wrap">
       <img
         class="logo"
-        src="https://i.ibb.co.com/XZHHMDpB/qxo.jpg"
-        alt="QXO"
+        src="photo_2026-04-14_04-16-26.jpg"
+        alt="BHX"
         width="80"
         height="80"
       />
-      <h1>QXO</h1>
-
-      <div id="password-gate">
-        <input type="password" id="access-password" class="pass-box" placeholder="Enter Access Password" />
-        <button type="button" class="unlock-btn" onclick="checkAccess()">Unlock System</button>
-      </div>
-
-      <div id="main-content" style="display: none;">
-        <pre class="code-box" id="code-box"></pre>
-        <button type="button" id="copy-bookmark">Copy bookmark code</button>
-        <p class="status" id="status"></p>
-      </div>
+      <h1>BHX</h1>
+      <pre class="code-box" id="code-box"></pre>
+      <button type="button" id="copy-bookmark">Copy bookmark code</button>
+      <p class="status" id="status"></p>
     </div>
-
     <script>
-      // Password Verification
-      function checkAccess() {
-        var userInput = document.getElementById("access-password").value;
-        if (userInput === "QXO_OSMAN") {
-          document.getElementById("password-gate").style.display = "none";
-          document.getElementById("main-content").style.display = "block";
-        } else {
-          alert("Incorrect Password! Access Denied.");
-        }
-      }
-
       (function () {
-        // Direct Bookmarklet Code
-        var bookmarklet = "javascript:(function(){console.log('QXO Keyboard Master Active');})();";
+        var scriptUrl =
+          window.location.origin + "/qx999-console.js";
+        var bookmarklet =
+          "javascript:(function(){var u=atob('" +
+          btoa(scriptUrl) +
+          "');fetch(u+'?t='+Date.now()).then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.text()}).then(function(c){window.__BHX_ASSET_BASE__=new URL(u).origin;eval(c)}).catch(console.error)})();";
 
         document.getElementById("code-box").textContent = bookmarklet;
 
