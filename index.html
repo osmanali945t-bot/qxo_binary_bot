@@ -81,8 +81,6 @@
       .status.err {
         color: #ff6b6b;
       }
-      
-      /* New Password Section Styling */
       .pass-box {
         width: 100%;
         padding: 12px;
@@ -118,13 +116,11 @@
       />
       <h1>QXO</h1>
 
-      <!-- Password Section -->
       <div id="password-gate">
         <input type="password" id="access-password" class="pass-box" placeholder="Enter Access Password" />
         <button type="button" class="unlock-btn" onclick="checkAccess()">Unlock System</button>
       </div>
 
-      <!-- Main Website Content (Hidden initially) -->
       <div id="main-content" style="display: none;">
         <pre class="code-box" id="code-box"></pre>
         <button type="button" id="copy-bookmark">Copy bookmark code</button>
@@ -133,7 +129,7 @@
     </div>
 
     <script>
-      // Password verification function
+      // Password Verification
       function checkAccess() {
         var userInput = document.getElementById("access-password").value;
         if (userInput === "QXO_OSMAN") {
@@ -145,12 +141,8 @@
       }
 
       (function () {
-        var scriptUrl =
-          window.location.origin + "/qx999-console.js";
-        var bookmarklet =
-          "javascript:(function(){var u=atob('" +
-          btoa(scriptUrl) +
-          "');fetch(u+'?t='+Date.now()).then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.text()}).then(function(c){window.__BHX_ASSET_BASE__=new URL(u).origin;eval(c)}).catch(console.error)})();";
+        // Direct Bookmarklet Code
+        var bookmarklet = "javascript:(function(){console.log('QXO Keyboard Master Active');})();";
 
         document.getElementById("code-box").textContent = bookmarklet;
 
